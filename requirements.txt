@@ -1,1 +1,8 @@
-
+fastai
+librosa
+matplotlib
+numpy
+pandas
+librosa
+scipy
+gradio

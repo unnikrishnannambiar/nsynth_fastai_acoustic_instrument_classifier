@@ -3,16 +3,17 @@
 # %% auto 0
 __all__ = ['learn', 'categories', 'aud', 'examples', 'intf', 'log_mel_spec_tfm', 'classify_aud']
 
-# %% app.ipynb 1
 from fastai.vision.all import *
-import matplotlib.pyplot as plt
 import librosa.display
+import matplotlib.pyplot as plt
 import numpy as np
+from functools import partial
 import pandas as pd
 import librosa
+from scipy.io import wavfile
 import gradio as gr 
 
-# %% app.ipynb 2
+# %% app.ipynb 1
 def log_mel_spec_tfm(fname):
     y, sr = librosa.load(fname, mono=True)
     D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
@@ -22,11 +23,11 @@ def log_mel_spec_tfm(fname):
     plt.close()
     return img
 
-# %% app.ipynb 3
+# %% app.ipynb 2
 learn = load_learner('model.pkl')
 learn.remove_cb(ProgressCallback)
 
-# %% app.ipynb 6
+# %% app.ipynb 5
 categories = ('Brass', 'Flute', 'Guitar', 'Keyboard', 'Mallet', 'Reed', 'String', 'Vocal')
 
 def classify_aud(aud):
@@ -35,7 +36,7 @@ def classify_aud(aud):
     pred, idx, probs = learn.predict(img_fname)
     return dict(zip(categories, map(float, probs)))
 
-# %% app.ipynb 7
+# %% app.ipynb 6
 aud = gr.Audio(source="upload", type="numpy")
 examples = [f.name for f in Path('.').iterdir() if '.wav' in f.name]
 
