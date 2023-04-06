@@ -35,8 +35,8 @@ def classify_aud(aud):
     pred, idx, probs = learn.predict(img_fname)
     return dict(zip(categories, map(float, probs)))
 
-# %% app.ipynb 7
-aud = gr.Audio(source="upload", type="numpy")
+# %% app.ipynb 8
+aud = gr.Audio(source="upload", type="filepath")
 examples = [f.name for f in Path('.').iterdir() if '.wav' in f.name]
 
 intf = gr.Interface(fn = classify_aud, inputs = aud, outputs = "label", examples = examples)
