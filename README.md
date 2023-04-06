@@ -1,6 +1,6 @@
 ---
 title: Instrument Sample Classifier
-emoji: 💩
+emoji: ♫ 🎸
 colorFrom: gray
 colorTo: yellow
 sdk: gradio
